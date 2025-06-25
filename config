@@ -171,7 +171,7 @@ bar {
        inactive_workspace  #$bg_alt #$bg_alt #$fg
        urgent_workspace    #$critical_bg #$critical_bg #$fg
     }
-    status_command bumblebee-status -m cpu memory battery pasink pasource network time -p time.format="%H:%M" -t moonlight-powerline 
+    status_command bumblebee-status -m cpu memory battery pasink pasource network time -p time.format="%H:%M" -t moonlight-powerline -p network.left-click="cinnamon-settings network" 
     gaps 4
 }
 
