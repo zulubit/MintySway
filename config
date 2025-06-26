@@ -1,7 +1,41 @@
-# Sway Config - Streamlined Theming & Correct Color Usage
+# Sway in one file! 
+# This configuration is fully self-contained—everything you need to run and customize Sway is included in this single file, with no other configs required.
+
+
+# use "man 5 sway" to read the configuration manual if needed
+# use "man -k sway" for list of all manuals
+
+# ---
+# Dependencies: Install all required packages with:
+#   sudo apt update && sudo apt install sway swaylock swayidle foot mako fuzzel wlogout brightnessctl pulseaudio-utils bumblebee-status xdg-desktop-portal-wlr grim slurp wl-clipboard network-manager ddcutil
+#
+# Notes:
+# - 'mako' is the notification daemon (package name is just 'mako', not 'mako-notifier')
+# - 'foot' is the terminal emulator
+# - 'pulseaudio-utils' provides 'pactl' for audio control (if using PipeWire, install 'pipewire' and 'wireplumber' instead)
+# - 'xdg-desktop-portal-wlr' enables screenshots, screen sharing, and remote desktop for Wayland apps
+# - 'grim' and 'slurp' provide screenshot support
+# - 'wlogout' is a graphical logout/power menu
+# - 'ddcutil' allows monitor hardware control (brightness, etc.) if supported
+#
+# You can install the required "AdwaitaMono Nerd Font" using "Embellish" found on Software Manager in mint.
+# ---
+
+# ---
+# Some settings are specific to device inputs and outputs. Use:
+# swaymsg -t get_outputs
+# and
+# swaymsg -t get_inputs
+# to find yours.
+# ---
+
+# --- Display scale (set per display) ---
+output eDP-1 scale 1
 
 # --- Startup ---
+# this disables your power buttons default behaviour
 exec systemd-inhibit --what=handle-power-key sleep infinity
+
 exec mako --background-color=#403c64 --text-color=#e4f3fa --border-color=#ff5370 --font="AdwaitaMono Nerd Font 14"
 exec blueman-applet
 
@@ -41,7 +75,9 @@ set $term foot -f "AdwaitaMono Nerd Font:size=14" \
   -o "colors.alpha=0.90"
 
 # --- Fuzzel Launcher (8-digit hex for colors) ---
-set $menu fuzzel -b '#$fuzzel_bg' -t '#$fuzzel_fg' -m '#ffcc00ff' -s '#212337ff' -S '#e4f3faff' -M '#ff5370ff' -C '#e4f3faff' -r 10 -B 1
+set $menu fuzzel -f "AdwaitaMono Nerd Font:size=10" \
+  -b '#$fuzzel_bg' -t '#$fuzzel_fg' -m '#ffcc00ff' -s '#212337ff' \
+  -S '#e4f3faff' -M '#ff5370ff' -C '#e4f3faff' -r 0 -B 1 -l 7
 
 # --- Power Menu ---
 set $power wlogout
