@@ -3,7 +3,7 @@
 # --- Startup ---
 exec systemd-inhibit --what=handle-power-key sleep infinity
 exec mako --background-color=#403c64 --text-color=#e4f3fa --border-color=#ff5370 --font="AdwaitaMono Nerd Font 14"
-exec blueman-manager
+exec blueman-applet
 
 # --- Theme Variables (define WITHOUT #) ---
 set $fg e4f3fa
