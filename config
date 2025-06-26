@@ -2,7 +2,7 @@
 
 # --- Startup ---
 exec systemd-inhibit --what=handle-power-key sleep infinity
-exec mako --background-color=#403c64 --text-color=#e4f3fa --border-color=#ff5370 --font="Arimo Nerd Font 14"
+exec mako --background-color=#403c64 --text-color=#e4f3fa --border-color=#ff5370 --font="AdwaitaMono Nerd Font 14"
 
 # --- Theme Variables (define WITHOUT #) ---
 set $fg e4f3fa
@@ -33,7 +33,7 @@ set $up k
 set $right l
 
 # --- Terminal (Foot: colors without #) ---
-set $term foot -f "Arimo Nerd Font:size=14" \
+set $term foot -f "AdwaitaMono Nerd Font:size=14" \
   -o "colors.foreground=$fg" \
   -o "colors.background=$bg_alt" \
   -o "colors.alpha=0.90"
@@ -160,7 +160,7 @@ bindsym $mod+r mode "resize"
 # --- Status Bar ---
 bar {
     position top
-    font "Arimo Nerd Font 16"
+    font "AdwaitaMono Nerd Font 14"
     colors {
        background #$bgt
        statusline #$fg

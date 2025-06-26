@@ -39,17 +39,9 @@ mkdir -p ~/.config/sway
 cp path/to/this/config ~/.config/sway/config
 ```
 
-**3. Install Agave Nerd Font:**
+**3. Install AdwaitaMono Nerd Font:**
 
-```
-mkdir -p ~/.local/share/fonts
-cd ~/.local/share/fonts
-wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.1/Agave.zip
-unzip -o Agave.zip
-rm Agave.zip
-fc-cache -fv
-cd ~
-```
+You can install it using *Embellish* found on *Software Manager* in mint.
 
 ## Usage
 
