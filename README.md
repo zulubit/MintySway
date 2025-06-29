@@ -22,7 +22,7 @@ sudo apt update && sudo apt install \
   xdg-desktop-portal-wlr grim slurp wl-clipboard \
   network-manager \
   fonts-agave \
-  ddcutil
+  ddcutil gammastep
 ```
 
 **2. Enable user brightness control:**
