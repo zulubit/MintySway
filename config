@@ -1,45 +1,81 @@
-# Sway in one file! 
-# This configuration is fully self-contained—everything you need to run and customize Sway is included in this single file, with no other configs required.
-
-# use "man 5 sway" to read the configuration manual if needed
-# use "man -k sway" for list of all manuals
-
-# ---
-# Dependencies: Install all required packages with:
-#   sudo apt update && sudo apt install sway swaylock swayidle foot mako fuzzel wlogout brightnessctl pulseaudio-utils bumblebee-status xdg-desktop-portal-wlr grim slurp wl-clipboard network-manager ddcutil gammastep
+# ============================================================================
+# EASY ONE-FILE SWAY CONFIGURATION
+# ============================================================================
 #
-# Notes:
-# - 'mako' is the notification daemon (package name is just 'mako', not 'mako-notifier')
-# - 'foot' is the terminal emulator
-# - 'pulseaudio-utils' provides 'pactl' for audio control (if using PipeWire, install 'pipewire' and 'wireplumber' instead)
-# - 'xdg-desktop-portal-wlr' enables screenshots, screen sharing, and remote desktop for Wayland apps
-# - 'grim' and 'slurp' provide screenshot support
-# - 'wlogout' is a graphical logout/power menu
-# - 'ddcutil' allows monitor hardware control (brightness, etc.) if supported
+# This file configures the Sway window manager—a tiling Wayland compositor.
+# Place this file at ~/.config/sway/config to use it.
 #
-# You can install the required "AdwaitaMono Nerd Font" using "Embellish" found on Software Manager in mint.
-# ---
-
-# ---
-# Some settings are specific to device inputs and outputs. Use:
-# swaymsg -t get_outputs
-# and
-# swaymsg -t get_inputs
-# to find yours.
-# ---
-
-# --- Display scale (set per display) ---
+# For the official manual, run:      man 5 sway
+# Sway Wiki and guides:              https://github.com/swaywm/sway/wiki
+#
+# This config is designed to be easy to read and customize.
+# Comments explain what each section does and what you may want to change.
+#
+# ============================================================================
+# DEPENDENCIES - REQUIRED PACKAGES
+# ============================================================================
+#
+# Before running Sway, install these packages (Debian/Ubuntu/Mint):
+#   sudo apt update && sudo apt install \
+#     sway swaylock swayidle foot mako fuzzel wlogout brightnessctl \
+#     pulseaudio-utils bumblebee-status xdg-desktop-portal-wlr grim slurp \
+#     wl-clipboard network-manager ddcutil gammastep blueman
+#
+# What these do:
+# - sway:              The window manager itself
+# - swaylock:          Locks your screen
+# - swayidle:          Handles auto-locking and screen blanking
+# - foot:              Terminal emulator (lightweight, Wayland-native)
+# - mako:              Notification daemon (shows pop-up notifications)
+# - fuzzel:            Application launcher (like dmenu/rofi)
+# - wlogout:           Graphical logout/power menu
+# - brightnessctl:     Controls screen brightness
+# - pulseaudio-utils:  Audio control
+# - bumblebee-status:  Status bar info (battery, network, etc.)
+# - xdg-desktop-portal-wlr: Wayland portal for screenshots, sharing, etc.
+# - grim + slurp:      Screenshot utilities
+# - wl-clipboard:      Clipboard management
+# - network-manager:   Network management
+# - ddcutil:           Monitor hardware control (if supported)
+# - gammastep:         Night light (warms/cools screen color)
+# - blueman:           Bluetooth tray applet
+#
+# Font: AdwaitaMono Nerd Font (install via Embellish or your package manager)
+#
+# ============================================================================
+# DEVICE NAMES
+# ============================================================================
+#
+# Some settings below are specific to your hardware (display, touchpad, etc).
+# To list your outputs (monitors):         swaymsg -t get_outputs
+# To list your input devices:              swaymsg -t get_inputs
+# Replace device names in the config as needed.
+#
+# ============================================================================
+# DISPLAY SCALE (HiDPI)
+# ============================================================================
+#
+# Set scaling for your monitor (e.g., 2 for 4K screens). Default is 1.
+# NOTE: Replace 'eDP-1' with your display name from 'swaymsg -t get_outputs'
 output eDP-1 scale 1
 
-# --- Startup ---
-# this disables your power buttons default behaviour
+# ============================================================================
+# STARTUP APPLICATIONS
+# ============================================================================
+#
+# These commands run automatically when Sway starts.
+# - Prevents accidental shutdown via power key
+# - Starts notifications, Bluetooth, and night light
 exec systemd-inhibit --what=handle-power-key sleep infinity
-
 exec mako --background-color=#403c64 --text-color=#e4f3fa --border-color=#ff5370 --font="AdwaitaMono Nerd Font 14"
 exec blueman-applet
 exec gammastep -O 4500
 
-# --- Theme Variables (define WITHOUT #) ---
+# ============================================================================
+# THEME COLORS (EDIT TO CUSTOMIZE LOOK)
+# ============================================================================
+#
+# Define color variables (hex, WITHOUT #). Use these for easy color changes.
 set $fg e4f3fa
 set $bg 403c64
 set $bg_alt 212337
@@ -49,68 +85,108 @@ set $critical_bg ff5370
 set $fuzzel_bg 403c64cc
 set $fuzzel_fg e4f3faff
 
+# ============================================================================
+# FONT SETTINGS
+# ============================================================================
+#
+# Font for window titles, bar, and launcher.
 font pango:AdwaitaMono Nerd Font 12
 
-# --- Gaps ---
+# ============================================================================
+# WINDOW GAPS (SPACE BETWEEN WINDOWS)
+# ============================================================================
 gaps inner 4
 gaps outer 0
 
-# --- Window Borders (5 args: border, background, text, indicator, child_border) ---
+# ============================================================================
+# WINDOW BORDERS (COLORS)
+# ============================================================================
+#
+# Format: border, background, text, indicator, child_border
 client.focused          #$bg #$bg #$fg #$fg #$bg
 client.unfocused        #$bg_alt #$bg_alt #$fg #$fg #$bg_alt
 client.focused_inactive #$bg_alt #$bg_alt #$fg #$fg #$bg_alt
 client.urgent           #$critical_bg #$critical_bg #$fg #$fg #$critical_bg
 
-# --- Modifiers and Key Variables ---
+# ============================================================================
+# MODIFIER KEY & KEY VARIABLES
+# ============================================================================
+#
+# $mod is your main modifier key (usually the "Windows" key)
 set $mod Mod4
 set $left h
 set $down j
 set $up k
 set $right l
 
-# --- Terminal (Foot: colors without #) ---
+# ============================================================================
+# TERMINAL & LAUNCHER COMMANDS
+# ============================================================================
+#
+# $term: Launches foot terminal with theme colors
 set $term foot -f "AdwaitaMono Nerd Font:size=14" \
   -o "colors.foreground=$fg" \
   -o "colors.background=$bg_alt" \
   -o "colors.alpha=0.90"
 
-# --- Fuzzel Launcher (8-digit hex for colors) ---
+# $menu: Fuzzel application launcher with theme colors
 set $menu fuzzel -f "AdwaitaMono Nerd Font:size=10" \
   -b '#$fuzzel_bg' -t '#$fuzzel_fg' -m '#ffcc00ff' -s '#212337ff' \
   -S '#e4f3faff' -M '#ff5370ff' -C '#e4f3faff' -r 0 -B 1 -l 7
 
-# --- Power Menu ---
+# $power: Power/logout menu
 set $power wlogout
 
+# ============================================================================
+# (OPTIONAL) INCLUDE ADDITIONAL CONFIGS
+# ============================================================================
 include /etc/sway/config-vars.d/*
 
-# --- Output Configuration ---
+# ============================================================================
+# WALLPAPER / BACKGROUND
+# ============================================================================
+# NOTE: Change the path below to your preferred wallpaper file.
 output * bg ~/.config/wall.jpg fill
 
-# --- Idle Configuration ---
+# ============================================================================
+# IDLE CONFIGURATION (SCREEN LOCK & POWER SAVING)
+# ============================================================================
+#
+# Locks screen after 5 min, turns off display after 10 min, locks before sleep.
+# Change timeouts (in seconds) as needed.
 exec swayidle -w \
     timeout 300 'swaylock -f -c 000000' \
     timeout 600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
     before-sleep 'swaylock -f -c 000000'
 
-# --- Input Configuration ---
+# ============================================================================
+# INPUT DEVICE CONFIGURATION (TOUCHPAD/MOUSE)
+# ============================================================================
+#
+# Find your device name with: swaymsg -t get_inputs
+# Adjust settings as needed for your hardware.
 input "1739:52981:SYNA2BA6:00_06CB:CEF5_Touchpad" {
-    dwt enabled
-    tap enabled
-    natural_scroll enabled
-    middle_emulation enabled
+    dwt enabled              # Disable-while-typing
+    tap enabled              # Tap-to-click
+    natural_scroll enabled   # Natural (reverse) scrolling
+    middle_emulation enabled # Middle-click with two fingers
 }
 
-# --- Key Bindings ---
-# Basics
-bindsym $mod+Return exec $term
-bindsym $mod+Shift+q kill
-bindsym $mod+d exec $menu
-floating_modifier $mod normal
-bindsym $mod+Shift+c reload
+# ============================================================================
+# KEY BINDINGS (WINDOW MANAGEMENT, LAUNCHERS, ETC.)
+# ============================================================================
+#
+# $mod is your main modifier key (usually the Windows key).
+# Customize these shortcuts as you like.
+# --- Basic ---
+bindsym $mod+Return exec $term                    # Launch terminal
+bindsym $mod+Shift+q kill                         # Close focused window
+bindsym $mod+d exec $menu                         # Launch app launcher (Fuzzel)
+floating_modifier $mod normal                     # Hold $mod to move/resize floating windows
+bindsym $mod+Shift+c reload                       # Reload config file
 bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
 
-# Focus movement
+# --- Focus movement (Vim-style and arrows) ---
 bindsym $mod+$left focus left
 bindsym $mod+$down focus down
 bindsym $mod+$up focus up
@@ -120,7 +196,7 @@ bindsym $mod+Down focus down
 bindsym $mod+Up focus up
 bindsym $mod+Right focus right
 
-# Move windows
+# --- Move windows ---
 bindsym $mod+Shift+$left move left
 bindsym $mod+Shift+$down move down
 bindsym $mod+Shift+$up move up
@@ -130,7 +206,7 @@ bindsym $mod+Shift+Down move down
 bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
-# Workspaces
+# --- Workspaces (1-10) ---
 bindsym $mod+1 workspace number 1
 bindsym $mod+2 workspace number 2
 bindsym $mod+3 workspace number 3
@@ -142,7 +218,7 @@ bindsym $mod+8 workspace number 8
 bindsym $mod+9 workspace number 9
 bindsym $mod+0 workspace number 10
 
-# Move focused container to workspace
+# --- Move focused window to workspace ---
 bindsym $mod+Shift+1 move container to workspace number 1
 bindsym $mod+Shift+2 move container to workspace number 2
 bindsym $mod+Shift+3 move container to workspace number 3
@@ -154,33 +230,39 @@ bindsym $mod+Shift+8 move container to workspace number 8
 bindsym $mod+Shift+9 move container to workspace number 9
 bindsym $mod+Shift+0 move container to workspace number 10
 
-# Layout
-bindsym $mod+b splith
-bindsym $mod+v splitv
-bindsym $mod+s layout stacking
-bindsym $mod+w layout tabbed
-bindsym $mod+e layout toggle split
-bindsym $mod+f fullscreen
-bindsym $mod+Shift+space floating toggle
-bindsym $mod+space focus mode_toggle
-bindsym $mod+a focus parent
+# --- Layout ---
+bindsym $mod+b splith                               # Horizontal split
+bindsym $mod+v splitv                               # Vertical split
+bindsym $mod+s layout stacking                      # Stacking layout
+bindsym $mod+w layout tabbed                        # Tabbed layout
+bindsym $mod+e layout toggle split                  # Toggle split orientation
+bindsym $mod+f fullscreen                           # Fullscreen focused window
+bindsym $mod+Shift+space floating toggle            # Toggle floating mode
+bindsym $mod+space focus mode_toggle                # Toggle focus mode
+bindsym $mod+a focus parent                         # Focus parent container
 
-# Scratchpad
-bindsym $mod+Shift+minus move scratchpad
-bindsym $mod+minus scratchpad show
+# --- Scratchpad (hide windows temporarily) ---
+bindsym $mod+Shift+minus move scratchpad            # Send window to scratchpad
+bindsym $mod+minus scratchpad show                  # Show scratchpad window
 
-# Power menu
-bindsym $mod+backspace exec $power
-bindsym XF86PowerOff exec $power
+# --- Power menu ---
+bindsym $mod+backspace exec $power                  # Open power/logout menu
+bindsym XF86PowerOff exec $power                    # Power key opens power menu
 
-# --- Volume and Brightness ---
+# ============================================================================
+# VOLUME AND BRIGHTNESS KEYS
+# ============================================================================
+#
+# These use your keyboard's media keys. Adjust if needed.
 bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%
 bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%
 bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
 bindsym XF86MonBrightnessUp exec brightnessctl set +10%
 bindsym XF86MonBrightnessDown exec brightnessctl set 10%-
 
-# --- Resize Mode ---
+# ============================================================================
+# RESIZE MODE (HOLD $mod+r, THEN USE ARROWS OR HJKL)
+# ============================================================================
 mode "resize" {
     bindsym $left resize shrink width 10px
     bindsym $down resize grow height 10px
@@ -195,7 +277,13 @@ mode "resize" {
 }
 bindsym $mod+r mode "resize"
 
-# --- Status Bar ---
+# ============================================================================
+# STATUS BAR (BUMBLEBEE-STATUS)
+# ============================================================================
+#
+# The bar at the bottom shows system info (battery, network, etc).
+# You can customize or replace bumblebee-status if you wish.
+# For more info: https://github.com/tobi-wan-kenobi/bumblebee-status
 bar {
     position bottom
     font "AdwaitaMono Nerd Font 12"
@@ -209,9 +297,24 @@ bar {
        inactive_workspace  #$bg_alt #$bg_alt #$fg
        urgent_workspace    #$critical_bg #$critical_bg #$fg
     }
-    status_command bumblebee-status -m apt cpu2 memory pasink pasource  brightness network battery date time -p time.format="%H:%M" memory.format="{used}/{total}" cpu2.layout="cpu2.coresload" -t moonlight-powerline -p network.left-click="cinnamon-settings network" 
+    status_command bumblebee-status -m apt cpu2 memory pasink pasource brightness network battery date time -p time.format="%H:%M" memory.format="{used}/{total}" cpu2.layout="cpu2.coresload" -t moonlight-powerline -p network.left-click="cinnamon-settings network" 
     gaps 4
 }
 
+# ============================================================================
+# (OPTIONAL) INCLUDE ADDITIONAL CONFIGS
+# ============================================================================
 include /etc/sway/config.d/*
+
+# ============================================================================
+# TROUBLESHOOTING & TIPS
+# ============================================================================
+#
+# - To reload this config after editing, press $mod+Shift+c
+# - If something doesn't work, check the logs: swaymsg -t get_log
+# - For more help, see: https://github.com/swaywm/sway/wiki
+#
+# ============================================================================
+# END OF CONFIG
+# ============================================================================
 
