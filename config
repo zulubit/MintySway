@@ -146,8 +146,7 @@ include /etc/sway/config-vars.d/*
 # WALLPAPER / BACKGROUND
 # ============================================================================
 # Change the path below to your preferred wallpaper file.
-# my personal backgroud: output * bg ~/.config/wall.jpg fill
-output * bg /usr/share/backgrounds/linuxmint-wallpapers/jpanchal_stripes.jpg fill
+output * bg ~/.config/wall.jpg fill
 
 # ============================================================================
 # IDLE CONFIGURATION (SCREEN LOCK & POWER SAVING)
@@ -180,9 +179,9 @@ input "1739:52981:SYNA2BA6:00_06CB:CEF5_Touchpad" {
 # $mod is your main modifier key (usually the Windows key).
 # Customize these shortcuts as you like.
 # --- Basic ---
-bindsym $mod+Return exec $term                    # Launch terminal
-bindsym $mod+Shift+q kill                         # Close focused window
-bindsym $mod+d exec $menu                         # Launch app launcher (Fuzzel)
+bindsym $mod+Return exec $term
+bindsym $mod+Shift+q kill
+bindsym $mod+d exec $menu
 bindsym $mod+Shift+c reload
 bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
 floating_modifier $mod normal
@@ -232,23 +231,23 @@ bindsym $mod+Shift+9 move container to workspace number 9
 bindsym $mod+Shift+0 move container to workspace number 10
 
 # --- Layout ---
-bindsym $mod+b splith                               # Horizontal split
-bindsym $mod+v splitv                               # Vertical split
-bindsym $mod+s layout stacking                      # Stacking layout
-bindsym $mod+w layout tabbed                        # Tabbed layout
-bindsym $mod+e layout toggle split                  # Toggle split orientation
-bindsym $mod+f fullscreen                           # Fullscreen focused window
-bindsym $mod+Shift+space floating toggle            # Toggle floating mode
-bindsym $mod+space focus mode_toggle                # Toggle focus mode
-bindsym $mod+a focus parent                         # Focus parent container
+bindsym $mod+b splith
+bindsym $mod+v splitv
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+bindsym $mod+f fullscreen
+bindsym $mod+Shift+space floating toggle
+bindsym $mod+space focus mode_toggle
+bindsym $mod+a focus parent
 
 # --- Scratchpad (hide windows temporarily) ---
-bindsym $mod+Shift+minus move scratchpad            # Send window to scratchpad
-bindsym $mod+minus scratchpad show                  # Show scratchpad window
+bindsym $mod+Shift+minus move scratchpad
+bindsym $mod+minus scratchpad show
 
 # --- Power menu ---
-bindsym $mod+backspace exec $power                  # Open power/logout menu
-bindsym XF86PowerOff exec $power                    # Power key opens power menu
+bindsym $mod+backspace exec $power
+bindsym XF86PowerOff exec $power
 
 # ============================================================================
 # VOLUME AND BRIGHTNESS KEYS
