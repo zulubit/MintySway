@@ -145,8 +145,9 @@ include /etc/sway/config-vars.d/*
 # ============================================================================
 # WALLPAPER / BACKGROUND
 # ============================================================================
-# NOTE: Change the path below to your preferred wallpaper file.
-output * bg ~/.config/wall.jpg fill
+# Change the path below to your preferred wallpaper file.
+# my personal backgroud: output * bg ~/.config/wall.jpg fill
+output * bg /usr/share/backgrounds/linuxmint-wallpapers/jpanchal_stripes.jpg fill
 
 # ============================================================================
 # IDLE CONFIGURATION (SCREEN LOCK & POWER SAVING)
@@ -182,9 +183,9 @@ input "1739:52981:SYNA2BA6:00_06CB:CEF5_Touchpad" {
 bindsym $mod+Return exec $term                    # Launch terminal
 bindsym $mod+Shift+q kill                         # Close focused window
 bindsym $mod+d exec $menu                         # Launch app launcher (Fuzzel)
-floating_modifier $mod normal                     # Hold $mod to move/resize floating windows
-bindsym $mod+Shift+c reload                       # Reload config file
+bindsym $mod+Shift+c reload
 bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
+floating_modifier $mod normal
 
 # --- Focus movement (Vim-style and arrows) ---
 bindsym $mod+$left focus left
