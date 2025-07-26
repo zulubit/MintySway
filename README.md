@@ -15,7 +15,7 @@ Back up your existing sway config and clone MintySway into place with:
 
 ```bash
 mv ~/.config/sway ~/.config/sway-old 2>/dev/null
-git clone https://github.com/YOUR-REPO/MintySway.git ~/.config/sway
+git clone https://github.com/zulubit/MintySway.git ~/.config/sway
 ```
 
 - The first command safely moves any old config out of the way (if it exists).
