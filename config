@@ -41,6 +41,7 @@
 # - blueman:           Bluetooth tray applet
 #
 # Font: AdwaitaMono Nerd Font (install via Embellish or your package manager)
+# Embellish can be found on flathub
 #
 # ============================================================================
 # DEVICE NAMES
@@ -77,13 +78,12 @@ exec gammastep -O 4500
 #
 # Define color variables (hex, WITHOUT #). Use these for easy color changes.
 set $fg e4f3fa
-set $bg 403c64
-set $bg_alt 212337
-set $bgt 212337e6
-set $warning_bg fc7b7b
+set $bg 212337
+set $accent 403c64
+set $warning_bg ffcc00
 set $critical_bg ff5370
-set $fuzzel_bg 403c64cc
-set $fuzzel_fg e4f3faff
+set $ff ff
+set $cc cc
 
 # ============================================================================
 # FONT SETTINGS
@@ -104,8 +104,8 @@ gaps outer 0
 #
 # Format: border, background, text, indicator, child_border
 client.focused          #$bg #$bg #$fg #$fg #$bg
-client.unfocused        #$bg_alt #$bg_alt #$fg #$fg #$bg_alt
-client.focused_inactive #$bg_alt #$bg_alt #$fg #$fg #$bg_alt
+client.unfocused        #$bg #$bg #$fg #$fg #$bg
+client.focused_inactive #$bg #$bg #$fg #$fg #$bg
 client.urgent           #$critical_bg #$critical_bg #$fg #$fg #$critical_bg
 
 # ============================================================================
@@ -126,12 +126,12 @@ set $right l
 # $term: Launches foot terminal with theme colors
 set $term foot -f "AdwaitaMono Nerd Font:size=14" \
   -o "colors.foreground=$fg" \
-  -o "colors.background=$bg_alt" \
+  -o "colors.background=$bg" \
   -o "colors.alpha=0.90"
 
 # $menu: Fuzzel application launcher with theme colors
 set $menu fuzzel -f "AdwaitaMono Nerd Font:size=10" \
-  -b '#$fuzzel_bg' -t '#$fuzzel_fg' -m '#ffcc00ff' -s '#212337ff' \
+  -b '#$bg$cc' -t '#$fg$ff' -m '#ffcc00ff' -s '#212337ff' \
   -S '#e4f3faff' -M '#ff5370ff' -C '#e4f3faff' -r 0 -B 1 -l 7
 
 # $power: Power/logout menu
@@ -146,7 +146,7 @@ include /etc/sway/config-vars.d/*
 # WALLPAPER / BACKGROUND
 # ============================================================================
 # Change the path below to your preferred wallpaper file.
-output * bg ~/.config/wall.jpg fill
+output * bg ~/.config/sway/background.jpg fill
 
 # ============================================================================
 # IDLE CONFIGURATION (SCREEN LOCK & POWER SAVING)
@@ -288,16 +288,16 @@ bar {
     position bottom
     font "AdwaitaMono Nerd Font 12"
     colors {
-       background #$bgt
+       background #$bg$cc
        statusline #$fg
        separator  #$fg
 
-       focused_workspace   #$bg #$bg #$fg
-       active_workspace    #$bg #$bg #$fg
-       inactive_workspace  #$bg_alt #$bg_alt #$fg
+       focused_workspace   #$accent #$accent #$fg
+       active_workspace    #$accent #$accent #$fg
+       inactive_workspace  #$bg #$bg #$fg
        urgent_workspace    #$critical_bg #$critical_bg #$fg
     }
-    status_command bumblebee-status -m apt cpu2 memory pasink pasource brightness network battery date time -p time.format="%H:%M" memory.format="{used}/{total}" cpu2.layout="cpu2.coresload" -t moonlight-powerline -p network.left-click="cinnamon-settings network" 
+    status_command bumblebee-status -m cpu2 memory pasink pasource brightness network battery date time -p time.format="%H:%M" memory.format="{used}/{total}" cpu2.layout="cpu2.coresload" -t moonlight-powerline -p network.left-click="cinnamon-settings network" 
     gaps 4
 }
 
