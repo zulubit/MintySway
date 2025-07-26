@@ -11,7 +11,7 @@ Sway window manager setup for **Linux Mint Cinnamon (latest version)**.
 
 ## Quick Install
 
-Back up your existing sway config and clone MintySway into place with:
+This will back up any existing Sway configuration you have and replace it with MintySway:
 
 ```bash
 mv ~/.config/sway ~/.config/sway-old 2>/dev/null
@@ -23,5 +23,7 @@ git clone https://github.com/zulubit/MintySway.git ~/.config/sway
 
 ### Next Steps
 
-1. Edit the new config (at `~/.config/sway/config`) to set your device names and preferences as explained in the comments.
-2. Log in to a Sway session.
+1. Read the comments in ~/.config/sway/config for dependency installation and setup guidance.
+2. Adjust the config for your device names and preferences as needed.
+3. Log in to a Sway session to start using MintySway.
+
