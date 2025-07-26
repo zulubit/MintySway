@@ -7,7 +7,7 @@ Sway window manager setup for **Linux Mint Cinnamon (latest version)**.
 > It is a **single, all-in-one config file**—no scattered dotfiles or directories.  
 > All setup, usage, and customization instructions are clearly documented as comments in the config file itself.
 
-![Screenshot of Sway Mint](mint-sway.png Sway itself, see the [Sway Wiki](https://github.com/swaywm/sway/wiki).
+![Screenshot of Sway Mint](mint-sway.png)
 
 ## Quick Install
 
