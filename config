@@ -17,7 +17,7 @@
 #
 # Before running Sway, install these packages (Debian/Ubuntu/Mint):
 #   sudo apt update && sudo apt install \
-#     sway swaylock swayidle foot mako fuzzel wlogout brightnessctl \
+#     sway swaylock swayidle foot mako fuzzel brightnessctl \
 #     pulseaudio-utils bumblebee-status xdg-desktop-portal-wlr grim slurp \
 #     wl-clipboard network-manager ddcutil gammastep blueman
 #
@@ -28,7 +28,6 @@
 # - foot:              Terminal emulator (lightweight, Wayland-native)
 # - mako:              Notification daemon (shows pop-up notifications)
 # - fuzzel:            Application launcher (like dmenu/rofi)
-# - wlogout:           Graphical logout/power menu
 # - brightnessctl:     Controls screen brightness
 # - pulseaudio-utils:  Audio control
 # - bumblebee-status:  Status bar info (battery, network, etc.)
@@ -134,9 +133,6 @@ set $menu fuzzel -f "AdwaitaMono Nerd Font:size=10" \
   -b '#$bg$cc' -t '#$fg$ff' -m '#ffcc00ff' -s '#212337ff' \
   -S '#e4f3faff' -M '#ff5370ff' -C '#e4f3faff' -r 0 -B 1 -l 7
 
-# $power: Power/logout menu
-set $power wlogout
-
 # ============================================================================
 # (OPTIONAL) INCLUDE ADDITIONAL CONFIGS
 # ============================================================================
@@ -156,7 +152,9 @@ output * bg ~/.config/sway/background.jpg fill
 # Change timeouts (in seconds) as needed.
 exec swayidle -w \
     timeout 300 'swaylock -f -c 000000' \
-    timeout 600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
+    timeout 600 'swaymsg "output * power off"' \
+    timeout 1200 'systemctl suspend' \
+    resume 'swaymsg "output * power on"' \
     before-sleep 'swaylock -f -c 000000'
 
 # ============================================================================
@@ -244,10 +242,6 @@ bindsym $mod+a focus parent
 # --- Scratchpad (hide windows temporarily) ---
 bindsym $mod+Shift+minus move scratchpad
 bindsym $mod+minus scratchpad show
-
-# --- Power menu ---
-bindsym $mod+backspace exec $power
-bindsym XF86PowerOff exec $power
 
 # ============================================================================
 # VOLUME AND BRIGHTNESS KEYS
