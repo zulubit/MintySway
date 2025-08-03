@@ -151,11 +151,11 @@ output * bg ~/.config/sway/background.jpg fill
 # Locks screen after 5 min, turns off display after 10 min, locks before sleep.
 # Change timeouts (in seconds) as needed.
 exec swayidle -w \
-    timeout 300 'swaylock -f -c 000000' \
+    timeout 300 'swaylock -f -c $bg' \
     timeout 600 'swaymsg "output * power off"' \
     timeout 1200 'systemctl suspend' \
     resume 'swaymsg "output * power on"' \
-    before-sleep 'swaylock -f -c 000000'
+    before-sleep 'swaylock -f -c $bg'
 
 # ============================================================================
 # INPUT DEVICE CONFIGURATION (TOUCHPAD/MOUSE)
@@ -182,6 +182,8 @@ bindsym $mod+Shift+q kill
 bindsym $mod+d exec $menu
 bindsym $mod+Shift+c reload
 bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
+bindsym $mod+Backspace exec swaylock -f -c $bg
+bindsym $mod+Shift+Backspace exec swaylock -f -c $bg && systemctl suspend
 floating_modifier $mod normal
 
 # --- Focus movement (Vim-style and arrows) ---
